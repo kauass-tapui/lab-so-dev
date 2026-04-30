@@ -6,17 +6,18 @@
 # Cole abaixo a saída de cada comando e anote o que observou.
 
 echo $$
-  PID do shell: 
+  PID do shell: 53
 
 cat /proc/[PID]/status   (substitua [PID] pelo número real)
-  PID:
-  PPID (processo pai):
-  State:
+  PID:5
+  PPID (processo pai):2
+  State:i (idle)
 
 cat /proc/[PID]/stat (campos relevantes)
-  Campo 2 — nome do executável:
-  Campo 3 — estado:
+  Campo 2 — nome do executável: kworker/u2:0
+  Campo 3 — estado: I (idle)
   Campos 14 e 15 — utime / stime:
+0 0
 
 ps aux (primeiras linhas)
   [cole aqui]
