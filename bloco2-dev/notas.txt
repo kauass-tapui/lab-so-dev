@@ -6,7 +6,11 @@
 # Quantas linhas tem soma.i? O que o pré-processador expandiu?
 
 Linhas em soma.i:
+cerca de 800 linhas
+
 Observação:
+O pré-processador expandiu as bibliotecas incluídas no código,
+como stdio.h, além de substituir macros e diretivas do programa.
 
 
 # FASE 2 — Assembly (gcc -S)
@@ -15,28 +19,50 @@ Observação:
 
 Trecho de soma.s:
 
+main:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movl	$30, %esi
+	leaq	.LC0(%rip), %rax
+	movq	%rax, %rdi
+	call	printf@PLT
+	popq	%rbp
+	ret
+
 Explicação:
+Essas instruções montam a função main em assembly.
+Elas organizam a pilha, carregam os argumentos do printf,
+chamam a função printf e depois encerram a execução.
 
 
 # FASE 3 — Código objeto (gcc -c)
 # Cole a saída de: file soma.o
 
 file soma.o:
+soma.o: ELF 64-bit relocatable
+
 
 # Cole a saída de: nm soma.o
 
 nm soma.o:
+0000000000000000 T main
+                 U printf
+
 
 # Quais símbolos aparecem? O que significa o marcador "U" ao lado
 # de printf?
 
 Observação sobre nm:
+O símbolo main está definido no arquivo objeto.
+O marcador "U" em printf significa que a função ainda não foi
+encontrada e será resolvida pelo ligador durante a compilação final.
 
 
 # FASE 4 — Ligação (gcc soma.o -o soma)
 # O que mudou após a ligação? Execute ./soma e registre a saída.
 
 Saída de ./soma:
+30
 
 
 # QUESTÕES DE SÍNTESE
@@ -46,9 +72,16 @@ Saída de ./soma:
 #    faz com esse símbolo?
 
 Resposta 1:
+Isso apareceu na parte da apresentação sobre ligação de programas.
+O ligador procura a implementação da função printf nas bibliotecas
+do sistema e conecta o símbolo ao endereço correto.
 
 
 # 2. Compare soma.i com soma.s: qual das duas saídas é análoga
 #    ao "código objeto" do montador histórico? Justifique.
 
 Resposta 2:
+O arquivo soma.s é mais parecido com o código objeto do montador
+histórico porque contém instruções em assembly, próximas da linguagem
+de máquina. Já o soma.i ainda possui código em C expandido pelo
+pré-processador.
