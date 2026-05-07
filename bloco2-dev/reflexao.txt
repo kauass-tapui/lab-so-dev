@@ -10,6 +10,14 @@
 # Dê um exemplo concreto do que você usou nesta atividade.
 
 Resposta:
+No shell moderno, isso é feito por redirecionamentos e pipes.
+Eles conectam programas, arquivos e dispositivos de entrada e saída.
+Um exemplo usado na atividade foi:
+
+strace echo "ola" 2>&1 | grep write
+
+Nesse comando, a saída de um programa foi redirecionada e enviada
+para outro comando usando pipe.
 
 
 # ─────────────────────────────────────────────────────
@@ -22,6 +30,10 @@ Resposta:
 #    que não mudou?
 
 Resposta 1:
+O make usa dependências e comparação de datas dos arquivos.
+Ele verifica se o arquivo fonte foi modificado depois do arquivo
+executável ou objeto. Se nada mudou, o make entende que não precisa
+recompilar.
 
 
 # 2. O monitor unificava "supervisor, carregador e rotinas de I/O
@@ -29,3 +41,7 @@ Resposta 1:
 #    de desenvolvimento moderno?
 
 Resposta 2:
+O Makefile unifica tarefas de compilação, ligação, execução e limpeza
+do projeto em um único arquivo de configuração. Assim, o desenvolvedor
+consegue automatizar todo o fluxo de desenvolvimento usando comandos
+simples no terminal.
